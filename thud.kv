@@ -1,0 +1,24 @@
+#:kivy 2.0.0
+#:import Label kivy.uix.label.Label
+
+
+<ThudGame>:
+    BoxLayout:
+        orientation: 'horizontal'
+        spacing: 10
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 0.7,1
+            spacing: 10
+            Label:
+                size_hint: 1,0.1
+                text: "/////"
+            GridLayout:
+                size_hint: 1,0.9
+                cols: 15
+                rows: 15
+                on_parent:
+                    for i in range(225): txt = "{0}".format(i); self.add_widget(Label(text = txt, color=(1,1,100,1)))
+        Button:
+            size_hint: 0.3,1
+            text: "////"
