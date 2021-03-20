@@ -15,5 +15,4 @@ class Dwarf(Pawn):
 
 
 class Troll(Pawn):
-    moveRange = 1
     pass
