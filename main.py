@@ -1,9 +1,9 @@
+import numpy as np
+import elements as el
 from kivy.app import App
 from kivy.clock import Clock
 from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
-
-# comment2
 
 
 class ThudGame(BoxLayout):
