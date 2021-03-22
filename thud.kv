@@ -1,6 +1,8 @@
 #:kivy 2.0.0
 #:import Label kivy.uix.label.Label
+#:import Image kivy.uix.image.Image
 
+#<Field@
 
 <ThudGame>:
     BoxLayout:
@@ -17,8 +19,10 @@
                 size_hint: 1,0.9
                 cols: 15
                 rows: 15
+                spacing: 2
                 on_parent:
-                    for i in range(225): txt = "{0}".format(i); self.add_widget(Label(text = txt, color=(1,1,100,1)))
+                    #for i in range(225): txt = "{0}".format(i); self.add_widget(Label(text = txt, color=(1,1,100,1)))
+                    for i in range(225): self.add_widget(Image(source = 'white_field.png'))
         Button:
             size_hint: 0.3,1
             text: "////"
