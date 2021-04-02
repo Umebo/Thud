@@ -1,6 +1,8 @@
 # Game elements module
+from kivy.uix.button import Button
 
-class Pawn():
+
+class Pawn(Button):
     def __init__(self, dim_x, dim_y):
         self.dim_x = dim_x
         self.dim_y = dim_y
@@ -25,7 +27,7 @@ class Troll(Pawn):
     pass
 
 
-def fill_pawn_list(positions, pawn_list, pawn_type):
+def fill_dwarf_pawn_list(positions, pawn_list, pawn_type):
     counter = 0
     for i in positions:
         pawn_list.append({
