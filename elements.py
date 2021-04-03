@@ -4,10 +4,6 @@ from kivy.uix.button import Button
 
 class Pawn(Button):
 
-    def __init__(self, dim_x, dim_y):
-        self.dim_x = dim_x
-        self.dim_y = dim_y
-
     def __str__(self):
         return '{}: [{},{}]'.format(self.symbol, self.dim_x, self.dim_y)
 

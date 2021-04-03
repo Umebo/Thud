@@ -51,14 +51,14 @@ class Board(GridLayout):
                             color=(1, 1, 1, 0.8)
                         )
                     )
-                elif j.symbol.find('T'):
+                elif "D" in j.symbol:
                     self.add_widget(
                         el.Button(
                             text=j.symbol,
                             color=(1, 1, 1, 0.8)
                         )
                     )
-                elif j.symbol.find('D'):
+                elif "T" in j.symbol:
                     self.add_widget(
                         el.Button(
                             text=j.symbol,
@@ -85,17 +85,12 @@ class ThudApp(App):
 
 if __name__ == '__main__':
     ThudApp().run()
-'''
 
-dwarf1 = el.Dwarf(5, 5, 'D2')
 
 board = Board()
-board.print_board()
 board.fill_board(dwarf_pawns)
 board.fill_board(troll_pawns)
 board.print_board()
 print(dwarf_pawns)
 print(len(dwarf_pawns))
-
-print(type(dwarf1.dim_x))
-'''
+print(len(troll_pawns))
