@@ -21,6 +21,7 @@
                 size_hint: 1,0.1
                 text: "/////"
             Board:
+                id: main_board
                 pos: self.parent.center
 
         Button:
@@ -28,9 +29,12 @@
             text: "////"
 
 <Board>:
-    id: main_board
     cols: 15
     rows: 15
     row_default_height: 30
     col_default_width: 30
     spacing: 2
+
+<Pawn>:
+    text: ' / '
+    color: 1,1,1,0.8

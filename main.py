@@ -5,19 +5,30 @@ from kivy.properties import ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.image import Image
+from kivy.uix.button import Button
 
-dwarf_positions = [[0, 0], [1, 1], [7, 3], [2, 1]]
+dwarf_positions = [[0, 5], [0, 6], [0, 8], [0, 9], [1, 4], [1, 10],
+                   [2, 3], [2, 11], [3, 2], [3, 12], [4, 1], [4, 13],
+                   [5, 0], [5, 14], [6, 0], [6, 14], [8, 0], [8, 14],
+                   [9, 0], [9, 14], [10, 1], [10, 13], [11, 2], [11, 12],
+                   [12, 3], [12, 11], [13, 4], [13, 10], [14, 5], [14, 6],
+                   [14, 8], [14, 9]]
 dwarf_pawns = []
 
-el.fill_dwarf_pawn_list(dwarf_positions, dwarf_pawns, el.Dwarf)
+troll_positions = [[6, 6], [6, 7], [6, 8], [7, 6],
+                   [7, 8], [8, 6], [8, 7], [8, 8]]
+troll_pawns = []
+
+el.fill_pawn_list(dwarf_positions, dwarf_pawns, el.Dwarf)
+el.fill_pawn_list(troll_positions, troll_pawns, el.Troll)
 
 
 class Board(GridLayout):
+    pawns = ObjectProperty(None)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.board = np.chararray((15, 15), itemsize=2)
-        for i in self.board:
-            self.add_widget(Image(source='white_field.png'))
+        self.board = np.empty((15, 15), dtype=el.Pawn)
 
     def show(self):
         for i in range(225):
@@ -26,35 +37,65 @@ class Board(GridLayout):
     def print_board(self):
         print(self.board)
 
-    def fill_board(self, pawns):
-        for pawn in pawns:
-            self.board[pawn['dwarf'].dim_x, pawn['dwarf'].dim_y] = pawn['id']
+    def fill_board(self, pawn_list):
+        for pawn in pawn_list:
+            self.board[pawn.dim_x, pawn.dim_y] = pawn
+
+    def update_board(self):
+        for i in self.board:
+            for j in i:
+                if j is None:
+                    self.add_widget(
+                        Button(
+                            text=' ',
+                            color=(1, 1, 1, 0.8)
+                        )
+                    )
+                elif j.symbol.find('T'):
+                    self.add_widget(
+                        el.Button(
+                            text=j.symbol,
+                            color=(1, 1, 1, 0.8)
+                        )
+                    )
+                elif j.symbol.find('D'):
+                    self.add_widget(
+                        el.Button(
+                            text=j.symbol,
+                            color=(1, 1, 1, 0.8)
+                        )
+                    )
 
 
 class ThudGame(BoxLayout):
     board = ObjectProperty(None)
 
+    def set_board(self):
+        self.board.fill_board(dwarf_pawns)
+        self.board.fill_board(troll_pawns)
+        self.board.update_board()
+
 
 class ThudApp(App):
     def build(self):
-        return ThudGame()
-
-        # board1 = Board()
-        # eturn board1
+        game = ThudGame()
+        game.set_board()
+        return game
 
 
 if __name__ == '__main__':
     ThudApp().run()
 '''
-dwarf1 = el.Dwarf(5, 5)
+
+dwarf1 = el.Dwarf(5, 5, 'D2')
 
 board = Board()
-board.show()
+board.print_board()
 board.fill_board(dwarf_pawns)
-board.show()
+board.fill_board(troll_pawns)
+board.print_board()
 print(dwarf_pawns)
-print(dwarf_pawns[0]['id'], dwarf_pawns[0]['dwarf'].dim_x)
 print(len(dwarf_pawns))
 
-print(type(dwarf1))
+print(type(dwarf1.dim_x))
 '''
