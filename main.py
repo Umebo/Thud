@@ -19,12 +19,11 @@ troll_positions = [[6, 6], [6, 7], [6, 8], [7, 6],
                    [7, 8], [8, 6], [8, 7], [8, 8]]
 troll_pawns = []
 
-el.fill_pawn_list(dwarf_positions, dwarf_pawns, el.Dwarf)
-el.fill_pawn_list(troll_positions, troll_pawns, el.Troll)
-
 
 class Board(GridLayout):
-    pawns = ObjectProperty(None)
+
+    el.fill_pawn_list(dwarf_positions, dwarf_pawns, el.Dwarf)
+    el.fill_pawn_list(troll_positions, troll_pawns, el.Troll)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -48,22 +47,12 @@ class Board(GridLayout):
                     self.add_widget(
                         Button(
                             text=' ',
-                            color=(1, 1, 1, 0.8)
+                            background_color=(100, 100, 1, 1)
                         )
                     )
-                elif "D" in j.symbol:
+                elif 'D' in j.text or 'T' in j.text:
                     self.add_widget(
-                        el.Button(
-                            text=j.symbol,
-                            color=(1, 1, 1, 0.8)
-                        )
-                    )
-                elif "T" in j.symbol:
-                    self.add_widget(
-                        el.Button(
-                            text=j.symbol,
-                            color=(1, 1, 1, 0.8)
-                        )
+                        j
                     )
 
 
@@ -94,3 +83,5 @@ board.print_board()
 print(dwarf_pawns)
 print(len(dwarf_pawns))
 print(len(troll_pawns))
+
+print(type(dwarf_pawns[1]))
