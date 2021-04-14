@@ -16,13 +16,19 @@ class Pawn(Button):
 
 class Dwarf(Pawn):
 
-    text = 'D'
+    def __init__(self, dim_x, dim_y, text):
+        super().__init__(dim_x, dim_y)
+        self.text = 'D' + str(text)
+
     move_range = 15
 
 
 class Troll(Pawn):
 
-    text = "T"
+    def __init__(self, dim_x, dim_y, text):
+        super().__init__(dim_x, dim_y)
+        self.text = 'T' + str(text)
+
     move_range = 1
 
 
@@ -30,7 +36,6 @@ def fill_pawn_list(positions, pawn_list, pawn_type):
     counter = 1
     for i in positions:
         pawn_list.append(
-            pawn_type(i[0], i[1])
+            pawn_type(i[0], i[1], counter)
         )
-        pawn_list[-1].text += str(counter)
         counter += 1
