@@ -19,7 +19,7 @@ def reset_buffer():
 class Pawn(Button):
 
     def __init__(self, dim_x, dim_y):
-        super().__init__()
+        super().__init__(text='xxx', background_color=(100, 1, 1, 1))
         self.dim_x = dim_x
         self.dim_y = dim_y
 
@@ -28,10 +28,14 @@ class Pawn(Button):
         self.dim_y = dim_y
 
 
+BufferPawn = Pawn(0, 0)
+
+
 class Dwarf(Pawn):
 
     def __init__(self, dim_x, dim_y, text):
         super().__init__(dim_x, dim_y)
+        self.background_color = (1, 1, 100, 1)
         self.text = 'D' + str(text)
         self.name = self.text
 
@@ -52,6 +56,7 @@ class Troll(Pawn):
 
     def __init__(self, dim_x, dim_y, text):
         super().__init__(dim_x, dim_y)
+        self.background_color = (1, 100, 1, 1)
         self.text = 'T' + str(text)
         self.name = self.text
 
