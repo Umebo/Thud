@@ -84,4 +84,4 @@ print(dwarf_pawns)
 print(len(dwarf_pawns))
 print(len(troll_pawns))
 
-print(dwarf_pawns[1])
+print(dwarf_pawns[1].text)
