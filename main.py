@@ -4,7 +4,8 @@ from kivy.app import App
 from kivy.properties import ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
-from kivy.uix.image import Image
+
+board = np.empty((15, 15), dtype=el.Pawn)
 
 dwarf_positions = [[0, 5], [0, 6], [0, 8], [0, 9], [1, 4], [1, 10],
                    [2, 3], [2, 11], [3, 2], [3, 12], [4, 1], [4, 13],
@@ -27,26 +28,19 @@ class Board(GridLayout):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.board = np.empty((15, 15), dtype=el.Pawn)
-
-    def show(self):
-        for i in range(225):
-            self.add_widget(Image(source='white_field.png'))
-
-    def print_board(self):
-        print(self.board)
 
     def fill_board(self, pawn_list):
+        global board
         for pawn in pawn_list:
-            self.board[pawn.dim_x, pawn.dim_y] = pawn
+            board[pawn.dim_x, pawn.dim_y] = pawn
 
     def update_board(self):
-        for i in self.board:
-            for j in i:
-                if j is None:
-                    self.add_widget(el.Pawn(0, 0))
-                else:
-                    self.add_widget(j)
+        global board
+        for index, i in np.ndenumerate(board):
+            if i is None:
+                self.add_widget(el.Field(0, 0))
+            else:
+                self.add_widget(i)
 
 
 class ThudGame(BoxLayout):
@@ -68,10 +62,4 @@ if __name__ == '__main__':
     ThudApp().run()
 
 
-board = Board()
-board.fill_board(pawn_list)
-board.print_board()
-
-print(type(pawn_list[1]))
-print(type(pawn_list[35]))
-print(board[0][0].property())
+print(board)
